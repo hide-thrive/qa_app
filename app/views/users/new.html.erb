@@ -1,0 +1,24 @@
+
+  <h1 class="text-center my-5">
+    <%= image_tag 'logo.png'%>
+  </h1>
+  <%= form_with model: @user, local: true do |f| %>
+    <div class="form-group pb-4">
+      <%= f.file_field :avatar, class: 'form-control text-center'%>
+    </div>
+    <div class="form-group pb-4">
+      <%= f.text_field :name, class: 'form-control text-center', placeholder: 'お名前'%>
+    </div>
+    <div class="form-group pb-4">
+      <%= f.text_field :email, class: 'form-control text-center', placeholder: 'メールアドレス' %>
+    </div>
+    <div class="form-group pb-4">
+      <%= f.text_field :password, class: 'form-control text-center', placeholder: 'パスワード' %>
+    </div>
+    <div class="form-group pb-4">
+      <%= f.text_field :password_confirmation, class: 'form-control text-center', placeholder: 'パスワード確認' %>
+    </div>
+    <div class="text-center">
+      <%= f.submit '登録', class: 'btn btn-info btn-lg' %>
+    </div>
+  <% end %>

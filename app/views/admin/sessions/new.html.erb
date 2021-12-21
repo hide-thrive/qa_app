@@ -1,0 +1,18 @@
+<div class="my-5 text-center">
+  <h1>管理画面ログイン</h1>
+</div>
+
+<div class="my-5 text-center">
+  <%= image_tag 'logo.png' %>
+</div>
+<%= form_with scope: :admin_session, local:true do |f| %>
+  <div class="form-group pb-4">
+    <%= f.text_field :email, class: 'form-control text-center', id: 'session_email', placeholder: 'メールアドレス' %>
+  </div>
+  <div class="form-group pb-4">
+    <%= f.password_field :password, class: 'form-control text-center', id: 'session_password', placeholder: 'パスワード' %>
+  </div>
+  <div class="text-center">
+    <%= f.submit 'ログイン', class: 'btn btn-info btn-lg' %>
+  </div>
+<% end %>

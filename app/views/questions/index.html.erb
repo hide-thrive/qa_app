@@ -1,0 +1,45 @@
+<div class="mb-4">
+  <%= link_to '全て', questions_path, class: "#{ params[:is_solved].nil? ? 'btn btn-info text-white' : 'btn btn-outline-info text-black' }" %>
+  <%= link_to '解決済み', questions_path(is_solved: true) , class: "#{ params[:is_solved] == "true" ? 'btn btn-info text-white' : 'btn btn-outline-info text-black' }" %>
+  <%= link_to '未解決', questions_path(is_solved: false), class: "#{ params[:is_solved] == "false" ? 'btn btn-info text-white' : 'btn btn-outline-info text-black' }" %>
+</div>
+
+<%= search_form_for @q, class: 'mb-5' do |f| %>
+  <div class="row">
+    <div class="col-9">
+      <%= f.search_field :title_cont, class: 'form-control', placeholder: '検索ワード' %>
+    </div>
+    <ul class="col-3">
+      <%= f.submit '検索', class: 'btn btn-info'%>
+    </div>
+  </div>
+<% end %>
+
+<div class="container">
+  <ul class="questions-list">
+    <% @questions.each do |question| %>
+    <li>
+      <% if question.user.avatar.attached? %>
+        <%= image_tag question.user.avatar, class: 'users-img' %>
+      <% else %>
+        <%= link_to image_tag('avatar.png', class: 'header-avatar img-fluid'), user_path(question.user) %>
+      <% end %>
+      <span>
+        <%= link_to question.title, question %>
+      </span>
+      <span>
+      <%if question.is_solved? %>
+        <span class="bg-secondary">解決済み</span>
+      <% else %>
+        <span class="bg-success text-white">未解決</span>
+      <% end %>
+      </span>
+    </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="mb-3">
+  <%= paginate @questions %>
+</div>
+

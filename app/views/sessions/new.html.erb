@@ -1,0 +1,14 @@
+<div class="logo-img text-center my-5">
+  <%= image_tag 'logo.png' , class: 'img-fluid rounded mx-auto'%>
+</div>
+<%= form_with scope: :session, local:true do |f| %>
+  <div class="form-group pb-4">
+    <%= f.text_field :email, class: 'form-control text-center', id: 'session_email', placeholder: 'メールアドレス' %>
+  </div>
+  <div class="form-group pb-4">
+    <%= f.password_field :password, class: 'form-control text-center', id: 'session_password', placeholder: 'パスワード' %>
+  </div>
+  <div class="form-btn text-center">
+    <%= f.submit 'ログイン', class: 'btn btn-info btn-lg' %>
+  </div>
+<% end %>

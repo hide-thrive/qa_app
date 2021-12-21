@@ -1,0 +1,42 @@
+
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <%= image_tag 'logo-sm.png' %>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end " id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <% if current_user %>
+            <li class="nav-item">
+              <%= link_to 'ログアウト', logout_path, method: :delete ,class: 'nav-link' %>
+            </li>
+          <% end %>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to 'ユーザー一覧', admin_users_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to '質問一覧', admin_questions_path, class: 'nav-link' %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to 'ユーザー一覧', users_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to '質問一覧', questions_path, class: 'nav-link' %>
+            </li>
+          <%end%>
+          <li class="nav-item">
+            <% if current_user.avatar.attached?%>
+              <%= image_tag current_user.avatar, class: 'header-avatar img-fluid'  %>
+            <% else %>
+              <%= link_to image_tag('avatar.png', class: 'header-avatar img-fluid'), user_path(current_user) %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

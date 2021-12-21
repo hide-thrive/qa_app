@@ -1,0 +1,59 @@
+<div>
+  <ul>
+    <li class="pb-5">
+      <span style="padding:0 20px 0 0;" class="user-avatars">
+      <% if current_user.avatar.attached? %>
+        <%= image_tag current_user.avatar %>
+      <% else %>
+        <%= link_to image_tag('avatar.png', class: 'header-avatar img-fluid'), user_path(current_user) %>
+      <% end %>
+      </span>
+      <span style="font-size: 25px;">
+      <%= @question.title%>
+      </span>
+      <% if current_user.id == @question.user_id %>
+        <span class="" style="padding:0 15px 0 50px;">
+          <%= link_to '編集', edit_question_path(@question), class: 'btn btn-info text-white' %>
+        </span>
+        <span class="mr-4" style="padding:0 15px 0 0;" >
+          <%= link_to '削除', @question, method: :delete, data: { confirm: "質問「#{@question.title}」を削除してもよろしいですか？"} , class: 'btn btn-danger' %>
+        </span>
+        <span >
+        <% if @question.is_solved? %>
+          <%= link_to '解決済み', question_path(@question.id, params: {question: {is_solved: false}}), method: :put, class: "btn btn-secondary" %>
+        <% else %>
+          <%= link_to '未解決', question_path(@question.id, params: {question: {is_solved: true}}), method: :put , class: "btn btn-success"%>
+        <% end %>
+        </span>
+      <% end %>
+    </li>
+    <li class="border-bottom">
+      <%= @question.content %>
+    </li>
+  </ul>
+</div>
+
+<div class="text-center">
+  <%= form_with model: [@question, @answer], local: true do |f| %>
+    <div class="form-group">
+      <%= f.text_area :content, class: 'form-control' %>
+    </div>
+    <div class="pt-4">
+      <%= f.submit '回答する', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+<div class="pt-5">
+  <% @question.answers.each do |answer| %>
+    <p class="border-bottom pb-3">
+      <span style="padding:0 20px 0 0;" >
+        <% if answer.user.avatar.attached?%>
+          <%= image_tag answer.user.avatar, class: "users-img"  %>
+        <% else %>
+          <%= link_to image_tag('avatar.png', class: 'header-avatar img-fluid'), user_path(current_user) %>
+        <% end %>
+      </span>
+      <%= answer.content %>
+    </p>
+  <% end %>
+</div>

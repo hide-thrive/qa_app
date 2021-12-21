@@ -1,0 +1,16 @@
+<div class="mt-4">
+  <% @users.each do |user| %>
+    <div class="border-bottom mb-3 pb-2">
+      <span style="padding: 0 20px 0 0 ;">
+        <% if user.avatar.attached? %>
+          <%=link_to image_tag(user.avatar, class: 'users-img'), user_path(user) %>
+        <% else %>
+          <%= link_to image_tag('avatar.png', class: 'header-avatar img-fluid'), user_path(user) %>
+        <% end %>
+      </span>
+      <span>
+        <%= user.name %>
+      </span>
+    </div>
+  <% end %>
+</div>

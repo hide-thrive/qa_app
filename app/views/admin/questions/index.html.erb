@@ -1,0 +1,32 @@
+<div class="py-4">
+  管理者画面:質問一覧
+</div>
+
+<%= search_form_for @q, class: 'mb-5' do |f| %>
+  <div class="row">
+    <div class="form-group col-8">
+      <%= f.search_field :title_cont, class: 'form-control', placeholder: '検索ワード' %>
+    </div>
+    <div class="form-group col-4">
+      <%= f.submit '検索', class: 'btn btn-info'%>
+    </div>
+  </div>
+<% end %>
+
+<% @questions.each do |question| %>
+  <div class="pb-3">
+    <span style="padding:0 10px 0 0;">
+      <% if question.user.avatar.attached?%>
+        <%= image_tag question.user.avatar, class: 'header-avatar img-fluid'  %>
+      <% else %>
+        <%= link_to image_tag('avatar.png', class: 'header-avatar img-fluid'), user_path(question.user) %>
+      <% end %>
+    </span>
+    <span style="font-size:25px; padding:0 20px 0 0;">
+      <%= question.title %>
+    </span>
+    <span>
+      <%= link_to '削除', question, method: :delete, class: 'btn btn-danger', data: {confirm: "ユーザー「#{question.title}」を削除します。よろしいですか？"}%>
+    </span>
+  </div>
+<% end %>

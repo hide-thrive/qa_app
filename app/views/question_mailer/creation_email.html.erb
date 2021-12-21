@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      <%= @question.user.name %>さんの新規の質問が登録されました。
+    </p>
+    <ul>
+      <li>
+        質問 : <%= @question.title %>
+      </li>
+      <li>
+        質問内容 : <%= simple_format(@question.content) %>
+      </li>
+    </ul>
+  </body>
+</html>
